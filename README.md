@@ -134,6 +134,11 @@ When contributing, please:
 - Update documentation as needed
 - Keep pull requests focused and concise
 
+## AI tools used
+- Bolt.new
+- ChatGPT
+- Cursor
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
