@@ -23,7 +23,7 @@ function App() {
             <Card>
               <CardTitle>
                 {service.name}
-                <StatusIndicator urls={[service.links[0].url, service.links[1].url]} />
+                <StatusIndicator urls={[service.links[0].url, service.links[1]?.url]} />
               </CardTitle>
               <CardLinks>
                 {service.links.map(({ name, url, CSSClasses }) => {
