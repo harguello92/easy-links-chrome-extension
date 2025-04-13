@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Service 1",
+    "links": [
+      {
+        "name": "Link 1",
+        "url": "https://www.link1.com",
+        "CSSClasses": "text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition-colors"
+      }
+    ]
+  },
+  {
+    "name": "Service 2",
+    "links": [
+      {
+        "name": "Link 1",
+        "url": "https://www.link1.com",
+        "CSSClasses": "text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition-colors"
+      },
+      {
+        "name": "Link 2",
+        "url": "https://www.link2.com",
+        "CSSClasses": "text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition-colors"
+      }
+    ]
+  }
+]
