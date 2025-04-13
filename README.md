@@ -1,6 +1,7 @@
 # EasyLinks Chrome extension
 
 This extension allows you to have service links at hand and at the same time be able to see the status of it.
+![Screenshot 2025-04-13 at 02 11 49](https://github.com/user-attachments/assets/1865f639-c526-407b-bcf0-da3669c2a761)
 
 ## Features
 
