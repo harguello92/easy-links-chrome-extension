@@ -15,7 +15,7 @@ export const CardLinks = ({ children }: CardLinksProps) => {
 interface CardLinkProps {
   children: React.ReactNode;
   href: string;
-  CSSClasses: string;
+  CSSClasses?: string;
 }
 
 export const CardLink = ({ children, href, CSSClasses }: CardLinkProps) => {

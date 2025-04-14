@@ -2,6 +2,8 @@ import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "preact/hooks";
 import { checkUrlStatus } from "../../utils/urlCheck";
 import classNames from "classnames";
+import { Config } from "../../types";
+import { ConfigItemViewModelType } from "../../models/ConfigItemViewModel";
 
 const getStatusColorClass = (percent: number): string => {
   if (percent < 50) {
@@ -16,16 +18,16 @@ const getStatusColorClass = (percent: number): string => {
 };
 
 interface StatusIndicatorProps {
-  urls: string[];
+  links: ConfigItemViewModelType['links'];
 }
 
-const StatusIndicator = ({ urls }: StatusIndicatorProps) => {
+const StatusIndicator = ({ links }: StatusIndicatorProps) => {
   const [loading, setLoading] = useState(true);
   const [statusPercent, setStatusPercent] = useState<number>(0);
 
   useEffect(() => {
     const checkStatuses = async () => {
-      const response = await Promise.all(urls.map(checkUrlStatus));
+      const response = await Promise.all(links.filter(link => link.checkable).map(link => checkUrlStatus(link.url)));
       const onlineServices = response.filter(Boolean).length;
       const totalServices = response.length;
 
