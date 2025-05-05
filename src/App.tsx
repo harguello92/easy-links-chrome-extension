@@ -8,6 +8,7 @@ import { getConfig } from './utils/db';
 import ConfigViewModel, { ConfigViewModelType } from './models/ConfigViewModel';
 import { ConfigItemViewModelType } from './models/ConfigItemViewModel';
 import { Config } from './types';
+import { ToastProvider } from './contexts/ToastContext';
 
 function App() {
   const [config, setConfig] = useState<ConfigViewModelType>(ConfigViewModel({} as Config));
@@ -23,34 +24,37 @@ function App() {
   }, []);
 
   return (
-    <div className="w-[400px] bg-gray-50">
-      <Header logoUrl="" />
-      <div className="p-4">
-        <div className="mb-4">
-          <Searcher onSearch={onSearch} />
-        </div>
-        <div className="space-y-3 h-[350px] overflow-y-auto">
-          {filteredConfig.map((configItem) => (
-            <Card>
-              <CardTitle>
-                {configItem.getName()}
-                <StatusIndicator links={configItem.getCheckeableLinks()} />
-              </CardTitle>
-              <CardLinks>
-                {configItem.getLinks().map(({ name, url, CSSClasses }) => {
-                  return (
-                    <CardLink href={url} CSSClasses={CSSClasses}>{name}</CardLink>
-                  )
-                })}
-              </CardLinks>
-            </Card>
-          ))}
-          {filteredConfig.length === 0 &&
-            <p className="text-center text-gray-500">No results found</p>
-          }
+    <ToastProvider>
+      <div className="w-[400px] bg-gray-50 relative">
+        <div id="modal-root" />
+        <Header logoUrl="" />
+        <div className="p-4">
+          <div className="mb-4">
+            <Searcher onSearch={onSearch} />
+          </div>
+          <div className="space-y-3 h-[350px] overflow-y-auto">
+            {filteredConfig.map((configItem) => (
+              <Card>
+                <CardTitle>
+                  {configItem.getName()}
+                  <StatusIndicator links={configItem.getCheckeableLinks()} />
+                </CardTitle>
+                <CardLinks>
+                  {configItem.getLinks().map(({ name, url, CSSClasses }) => {
+                    return (
+                      <CardLink href={url} CSSClasses={CSSClasses}>{name}</CardLink>
+                    )
+                  })}
+                </CardLinks>
+              </Card>
+            ))}
+            {filteredConfig.length === 0 &&
+              <p className="text-center text-gray-500">No results found</p>
+            }
+          </div>
         </div>
       </div>
-    </div>
+    </ToastProvider>
   );
 }
 
