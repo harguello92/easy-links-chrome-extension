@@ -1,12 +1,9 @@
 import { ConfigItem } from "../types";
-
-
 export interface ConfigItemViewModelType extends ConfigItem {
   getCheckeableLinks: () => ConfigItem['links'];
   getLinks: () => ConfigItem['links'];
   getName: () => ConfigItem['name'];
 }
-
 
 const ConfigItemViewModel = (configItem: ConfigItem): ConfigItemViewModelType => {
   return {

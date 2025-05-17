@@ -1,11 +1,7 @@
 import { useState } from "preact/hooks";
 import { createUploadElement, handleFileUpload } from "../utils/fileUpload";
 
-type UseUploadFileProps = {
-  errorManager?: (error: string) => void;
-};
-
-const useUploadFile = ({ errorManager }: UseUploadFileProps) => {
+const useUploadFile = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,20 +15,12 @@ const useUploadFile = ({ errorManager }: UseUploadFileProps) => {
       const file = await handleFileUpload(input)
 
       if (!file) {
-        if (errorManager) {
-          errorManager("No file selected");
-        }
-
         setError("No file selected");
         return;
       }
 
-      return file
+      return file;
     } catch (err) {
-      if (errorManager) {
-        errorManager("No file selected");
-      }
-
       setError("Failed to upload file");
     } finally {
       setIsUploading(false);
@@ -42,7 +30,7 @@ const useUploadFile = ({ errorManager }: UseUploadFileProps) => {
   return {
     isUploading,
     error,
-    uploadFile,
+    uploadFile
   };
 }
 

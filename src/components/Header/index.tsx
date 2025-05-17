@@ -6,20 +6,36 @@ import useUploadFile from "../../hooks/useUploadFile";
 import { useEffect } from "react";
 import { useToast } from "../../hooks/useToast";
 import useJSONReadFile from "../../hooks/useJSONReadFile";
+import { saveConfig } from "../../utils/db";
+import usePersistFile from "../../hooks/usePersistFile";
+import useValidateConfig from "../../hooks/useValidateConfig";
 interface HeaderProps {
   logoUrl: string;
 }
 
 const Header = ({ logoUrl }: HeaderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { showError } = useToast();
+  const { showError, showSuccess } = useToast();
 
   const {
     error: uploadFileError,
     uploadFile
-  } = useUploadFile({ errorManager: showError });
+  } = useUploadFile();
 
-  const { readFile, error: readFileError } = useJSONReadFile({ errorManager: showError });
+  const {
+    readFile,
+    error: readFileError
+  } = useJSONReadFile();
+
+  const {
+    persistFile,
+    error: persistFileError
+  } = usePersistFile();
+
+  const {
+    validateConfig,
+    error: validateConfigError
+  } = useValidateConfig();
 
   useEffect(() => {
     if (uploadFileError) {
@@ -29,7 +45,20 @@ const Header = ({ logoUrl }: HeaderProps) => {
     if (readFileError) {
       showError(readFileError);
     }
-  }, [uploadFileError, readFileError]);
+
+    if (persistFileError) {
+      showError(persistFileError);
+    }
+
+    if (validateConfigError) {
+      showError(validateConfigError);
+    }
+  }, [
+    uploadFileError,
+    readFileError,
+    persistFileError,
+    validateConfigError
+  ]);
 
   const handleFileUpload = async () => {
     const file = await uploadFile();
@@ -40,7 +69,15 @@ const Header = ({ logoUrl }: HeaderProps) => {
     }
 
     const jsonData = await readFile(file);
-    console.log("File content:", jsonData);
+    const isValid = validateConfig(jsonData);
+
+    if (isValid) {
+      const isFilePersisted = persistFile(jsonData);
+
+      if (isFilePersisted) {
+        showSuccess("File uploaded successfully");
+      }
+    }
   };
 
   return (

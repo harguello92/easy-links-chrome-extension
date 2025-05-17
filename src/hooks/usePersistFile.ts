@@ -1,0 +1,27 @@
+import { useState } from "preact/hooks";
+import { saveConfig } from "../utils/db";
+import { Config } from "../types";
+
+const usePersistFile = () => {
+  const [error, setError] = useState<string | null>(null);
+
+
+  const persistFile = (jsonData: Config) => {
+    setError(null);
+
+    try {
+      saveConfig(jsonData);
+      return true
+    } catch (err) {
+      setError("Failed to upload file");
+      return false
+    }
+  };
+
+  return {
+    error,
+    persistFile
+  };
+}
+
+export default usePersistFile;

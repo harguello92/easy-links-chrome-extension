@@ -48,8 +48,8 @@ export const readFileAsText = (file: File): Promise<string> => {
 };
 
 export const readFileAsJson = async (file: File): Promise<any> => {
-  const fileContent = await readFileAsText(file);
   try {
+    const fileContent = await readFileAsText(file);
     return JSON.parse(fileContent);
   } catch (error) {
     throw new Error("Failed to parse JSON");

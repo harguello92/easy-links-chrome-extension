@@ -1,11 +1,7 @@
 import { useState } from "preact/hooks";
 import { readFileAsJson } from "../utils/fileUpload";
 
-type UseJSONReadFileProps = {
-  errorManager?: (error: string) => void;
-};
-
-const useJSONReadFile = ({ errorManager }: UseJSONReadFileProps) => {
+const useJSONReadFile = () => {
   const [isReading, setIsReading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,14 +11,8 @@ const useJSONReadFile = ({ errorManager }: UseJSONReadFileProps) => {
     setError(null);
 
     try {
-      const fileContent = await readFileAsJson(file);
-      const jsonData = JSON.parse(fileContent);
-      return jsonData;
+      return readFileAsJson(file);
     } catch (err) {
-      if (errorManager) {
-        errorManager("Failed to read file");
-      }
-
       setError("Failed to read file");
     } finally {
       setIsReading(false);
