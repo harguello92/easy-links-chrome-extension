@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Card, { CardLink, CardLinks, CardTitle } from './components/Card';
 import StatusIndicator from './components/StatusIndicator';
 import { useEffect, useState } from 'preact/hooks';
-import { getConfig } from './utils/db';
+import { getConfig } from './utils/localStorage';
 import ConfigViewModel, { ConfigViewModelType } from './models/ConfigViewModel';
 import { ConfigItemViewModelType } from './models/ConfigItemViewModel';
 import { Config } from './types';

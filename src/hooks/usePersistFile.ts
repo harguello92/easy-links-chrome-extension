@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { saveConfig } from "../utils/db";
+import { saveConfig } from "../utils/localStorage";
 import { Config } from "../types";
 
 const usePersistFile = () => {

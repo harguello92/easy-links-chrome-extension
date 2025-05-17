@@ -6,7 +6,7 @@ import useUploadFile from "../../hooks/useUploadFile";
 import { useEffect } from "react";
 import { useToast } from "../../hooks/useToast";
 import useJSONReadFile from "../../hooks/useJSONReadFile";
-import { saveConfig } from "../../utils/db";
+import { saveConfig } from "../../utils/localStorage";
 import usePersistFile from "../../hooks/usePersistFile";
 import useValidateConfig from "../../hooks/useValidateConfig";
 interface HeaderProps {
