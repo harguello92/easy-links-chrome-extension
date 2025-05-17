@@ -57,18 +57,33 @@ The extension can be configured through the `extension-config.json` file. This f
 Example configuration:
 
 ```json
-[
-  {
-    "name": "Service 1",
-    "links": [
-      {
-        "name": "Link 1",
-        "url": "https://www.link1.com",
-        "CSSClasses": "text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition-colors"
-      }
-    ]
-  }
-]
+{
+  "logo": "",
+  "items": [
+    {
+      "name": "Service 1",
+      "links": [
+        {
+          "name": "Link 1",
+          "url": "https://www.link1.com"
+        }
+      ]
+    },
+    {
+      "name": "Service 2",
+      "links": [
+        {
+          "name": "Link 1",
+          "url": "https://www.link1.com"
+        },
+        {
+          "name": "Link 2",
+          "url": "https://www.link2.com"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ### Manifest Configuration
@@ -135,6 +150,7 @@ When contributing, please:
 - Keep pull requests focused and concise
 
 ## AI tools used
+
 - Bolt.new
 - ChatGPT
 - Cursor

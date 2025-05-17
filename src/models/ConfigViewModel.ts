@@ -10,7 +10,7 @@ const ConfigViewModel = (config: Config): ConfigViewModelType => {
   return {
     ...config,
     getItems: () => (config.items || []).map(item => ConfigItemViewModel(item)),
-    getLogoUrl: () => config.logoUrl,
+    getLogoUrl: () => config.logo,
   }
 }
 

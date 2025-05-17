@@ -6,37 +6,45 @@ const useValidateConfig = () => {
 
 
   const validateConfig = (jsonData: Config) => {
-    if (!Array.isArray(jsonData)) {
-      setError("Invalid JSON format. Expected an array.");
+    const { logo, items } = jsonData;
+
+    if (logo !== undefined && typeof logo !== "string") {
+      setError("Logo must be a string");
       return false;
     }
 
-    for (const service of jsonData) {
-      if (typeof service.name !== "string") {
-        setError("Invalid service name. Expected a string.");
+    if (!Array.isArray(items)) {
+      setError("Items must be an array");
+      return false;
+    }
+
+    for (const item of items) {
+      if (typeof item.name !== "string") {
+        setError("Item name must be a string");
         return false;
       }
 
-      if (!Array.isArray(service.links)) {
-        setError("Invalid links format. Expected an array.");
+      if (!Array.isArray(item.links)) {
+        setError("Item links must be an array");
         return false;
       }
 
-      for (const link of service.links) {
+      for (const link of item.links) {
         if (typeof link.name !== "string") {
-          setError("Invalid link name. Expected a string.");
+          setError("Link name must be a string");
           return false;
         }
 
         if (typeof link.url !== "string") {
-          setError("Invalid link URL. Expected a string.");
+          setError("Link URL must be a string");
           return false;
         }
       }
     }
 
+    setError(null);
     return true;
-  };
+  }
 
   return {
     error,

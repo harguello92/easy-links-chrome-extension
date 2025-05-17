@@ -15,15 +15,14 @@ export const CardLinks = ({ children }: CardLinksProps) => {
 interface CardLinkProps {
   children: React.ReactNode;
   href: string;
-  CSSClasses?: string;
 }
 
-export const CardLink = ({ children, href, CSSClasses }: CardLinkProps) => {
+export const CardLink = ({ children, href }: CardLinkProps) => {
   return <a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className={classNames("flex flex-1 items-center justify-center px-3 py-2 text-sm font-medium rounded-md", CSSClasses)}
+    className={classNames("flex flex-1 items-center justify-center px-3 py-2 text-sm font-medium rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors")}
   >{children}</a>
 }
 

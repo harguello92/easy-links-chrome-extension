@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Card, { CardLink, CardLinks, CardTitle } from './components/Card';
 import StatusIndicator from './components/StatusIndicator';
 import { useEffect, useState } from 'preact/hooks';
-import { getConfig } from './utils/localStorage';
+import { getConfig as getPersistedConfig } from './utils/localStorage';
 import ConfigViewModel, { ConfigViewModelType } from './models/ConfigViewModel';
 import { ConfigItemViewModelType } from './models/ConfigItemViewModel';
 import { Config } from './types';
@@ -14,14 +14,11 @@ function App() {
   const [config, setConfig] = useState<ConfigViewModelType>(ConfigViewModel({} as Config));
   const { data: filteredConfig, onSearch } = useSearch<ConfigItemViewModelType>(config.getItems(), ['name']);
 
-  useEffect(() => {
-    const loadConfig = async () => {
-      const config = await getConfig();
-      setConfig(ConfigViewModel(config));
-    };
+  const persistedConfig = getPersistedConfig();
 
-    loadConfig();
-  }, []);
+  useEffect(() => {
+    setConfig(ConfigViewModel(persistedConfig));
+  }, [persistedConfig]);
 
   return (
     <ToastProvider>
@@ -40,9 +37,9 @@ function App() {
                   <StatusIndicator links={configItem.getCheckeableLinks()} />
                 </CardTitle>
                 <CardLinks>
-                  {configItem.getLinks().map(({ name, url, CSSClasses }) => {
+                  {configItem.getLinks().map(({ name, url }) => {
                     return (
-                      <CardLink href={url} CSSClasses={CSSClasses}>{name}</CardLink>
+                      <CardLink href={url}>{name}</CardLink>
                     )
                   })}
                 </CardLinks>

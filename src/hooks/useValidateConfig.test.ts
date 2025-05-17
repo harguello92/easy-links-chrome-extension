@@ -56,16 +56,21 @@ describe("useValidateConfig", () => {
     const { result } = renderHook(() => useValidateConfig());
 
     act(() => {
-      const isValid = result.current.validateConfig([{
-        name: "Service",
-        links: [{
-          name: "Link",
-          url: "https://example.com"
-        }]
-      }]);
+      const isValid = result.current.validateConfig({
+        logo: "https://example.com/logo.png",
+        items: [
+          {
+            name: "Service",
+            links: [
+              { name: "Link1", url: "https://example.com" },
+              { name: "Link2", url: "https://example.com" },
+            ],
+          },
+        ]
+      });
 
       expect(isValid).toBe(true);
-      expect(result.current.error).toBe(null);
+      expect(result.current.error).toBe("");
     });
   });
 });

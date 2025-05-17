@@ -12,7 +12,7 @@ export interface ConfigItem {
 }
 
 export interface Config {
-  logoUrl: string;
+  logo: string;
   items: ConfigItem[];
 }
 
