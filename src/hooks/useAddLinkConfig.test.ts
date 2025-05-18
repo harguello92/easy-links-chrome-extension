@@ -1,7 +1,7 @@
 import { useState } from "preact/hooks";
-import { createUploadElement, handleFileUpload } from "../utils/fileUpload";
+import { createUploadElement, handleFileUpload } from "../utils/files";
 
-const useUploadFile = () => {
+const useUploadConfig = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,4 +34,4 @@ const useUploadFile = () => {
   };
 }
 
-export default useUploadFile;
+export default useUploadConfig;

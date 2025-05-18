@@ -1,7 +1,7 @@
 export const createUploadElement = () => {
   const input = document.createElement("input");
   input.type = "file";
-  input.accept = "json/*";
+  input.accept = ".json";
   input.style.display = "none";
   document.body.appendChild(input);
 
@@ -55,3 +55,15 @@ export const readFileAsJson = async (file: File): Promise<any> => {
     throw new Error("Failed to parse JSON");
   }
 };
+
+export const downloadFile = (filename: string, content: string) => {
+  const blob = new Blob([content], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}

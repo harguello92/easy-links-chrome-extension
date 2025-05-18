@@ -10,7 +10,6 @@ const usePersistFile = () => {
     setError(null);
 
     try {
-      console.log("jsonData", jsonData);
       saveConfig(jsonData);
       return true
     } catch (err) {

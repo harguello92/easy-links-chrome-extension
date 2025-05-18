@@ -1,8 +1,6 @@
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "preact/hooks";
 import { checkUrlStatus } from "../../utils/urlCheck";
-import classNames from "classnames";
-import { Config } from "../../types";
 import { ConfigItemViewModelType } from "../../models/ConfigItemViewModel";
 
 const getStatusColorClass = (percent: number): string => {
@@ -27,7 +25,8 @@ const StatusIndicator = ({ links }: StatusIndicatorProps) => {
 
   useEffect(() => {
     const checkStatuses = async () => {
-      const response = await Promise.all(links.filter(link => link.checkable).map(link => checkUrlStatus(link.url)));
+      const response = await Promise.all(links.map(link => checkUrlStatus(link.url)));
+
       const onlineServices = response.filter(Boolean).length;
       const totalServices = response.length;
 
@@ -46,7 +45,7 @@ const StatusIndicator = ({ links }: StatusIndicatorProps) => {
   }
 
 
-  return <span className={classNames("w-4 h-4 rounded-full", getStatusColorClass(statusPercent))}></span>
+  return <span className={`w-4 h-4 rounded-full ${getStatusColorClass(statusPercent)}`}></span>
 }
 
 export default StatusIndicator;

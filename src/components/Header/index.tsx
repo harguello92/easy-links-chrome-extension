@@ -1,15 +1,16 @@
-import { PlusCircle, Server, Upload } from "lucide-react";
+import { FileDown, PlusCircle, Server, Upload } from "lucide-react";
 import { useState } from "preact/hooks";
-import ModalAddNewItem from "../ModalAddNewItem";
+import ModalAddNewItem from "../ModalAddNewLink";
 import Image from "../Image";
-import useUploadFile from "../../hooks/useUploadFile";
+import useUploadConfig from "../../hooks/useUploadConfig";
 import { useEffect } from "react";
 import { useToast } from "../../hooks/useToast";
 import useJSONReadFile from "../../hooks/useJSONReadFile";
 import usePersistFile from "../../hooks/usePersistFile";
 import useValidateConfig from "../../hooks/useValidateConfig";
+import useDownloadConfig from "../../hooks/useDownloadConfig";
 interface HeaderProps {
-  logoUrl: string;
+  logoUrl?: string;
 }
 
 const Header = ({ logoUrl }: HeaderProps) => {
@@ -19,7 +20,7 @@ const Header = ({ logoUrl }: HeaderProps) => {
   const {
     error: uploadFileError,
     uploadFile
-  } = useUploadFile();
+  } = useUploadConfig();
 
   const {
     readFile,
@@ -35,6 +36,11 @@ const Header = ({ logoUrl }: HeaderProps) => {
     validateConfig,
     error: validateConfigError
   } = useValidateConfig();
+
+  const {
+    error: downloadFileError,
+    downloadConfig
+  } = useDownloadConfig();
 
   useEffect(() => {
     if (uploadFileError) {
@@ -52,11 +58,16 @@ const Header = ({ logoUrl }: HeaderProps) => {
     if (validateConfigError) {
       showError(validateConfigError);
     }
+
+    if (downloadFileError) {
+      showError(downloadFileError);
+    }
   }, [
     uploadFileError,
     readFileError,
     persistFileError,
-    validateConfigError
+    validateConfigError,
+    downloadFileError
   ]);
 
   const handleFileUpload = async () => {
@@ -79,6 +90,10 @@ const Header = ({ logoUrl }: HeaderProps) => {
     }
   };
 
+  const handleFileDownload = async () => {
+    downloadConfig();
+  };
+
   return (
     <>
       <header className="bg-white border-b border-gray-200 px-4 py-3 flex justify-between items-center">
@@ -89,12 +104,15 @@ const Header = ({ logoUrl }: HeaderProps) => {
           </Image>
         </div>
         <div className="flex items-center">
-          <div title="Add New Item">
+          <div title="Add new link">
             <PlusCircle className="w-6 h-6 text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer" onClick={() => {
               setIsModalOpen(true)
             }} />
           </div>
-          <div title="Upload File">
+          <div title="Download config file">
+            <FileDown className="w-6 h-6 text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer ml-4" onClick={handleFileDownload} />
+          </div>
+          <div title="Upload config file">
             <Upload className="w-6 h-6 text-indigo-600 hover:text-indigo-800 hover:scale-105 cursor-pointer ml-4" onClick={handleFileUpload} />
           </div>
         </div>

@@ -1,15 +1,15 @@
 import { useState } from "preact/hooks";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 
-const useSearch = <T extends Record<string, any>>(initialData: T[], filterAttributes: string[]) => {
-  const [data, setData] = useState<T[]>(initialData);
+const useSearch = <T extends Record<string, any>>(items: T[], filterAttributes: string[]) => {
+  const [data, setData] = useState<T[]>(items);
 
   useEffect(() => {
-    setData(initialData);
-  }, [initialData]);
+    setData(items);
+  }, [items]);
 
   const onSearch = (query: string) => {
-    const filteredData = initialData.filter((item: T) => {
+    const filteredData = items.filter((item: T) => {
       return filterAttributes.some((attribute: string) => {
         return item[attribute].toString().toLowerCase().includes(query.toLowerCase());
       });

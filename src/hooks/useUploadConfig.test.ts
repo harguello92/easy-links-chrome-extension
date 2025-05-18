@@ -1,16 +1,16 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import useUploadFile from "./useUploadFile";
+import useUploadConfig from "./useUploadConfig";
 
-describe("useUploadFile", () => {
+describe("useUploadConfig", () => {
   it("should initialize with default values", () => {
-    const { result } = renderHook(() => useUploadFile());
+    const { result } = renderHook(() => useUploadConfig());
 
     expect(result.current.isUploading).toBe(false);
     expect(result.current.error).toBe(null);
   });
 
   it("should set isUploading to true when uploading a file", async () => {
-    const { result } = renderHook(() => useUploadFile());
+    const { result } = renderHook(() => useUploadConfig());
 
     act(() => {
       result.current.uploadFile();
@@ -20,7 +20,7 @@ describe("useUploadFile", () => {
   });
 
   it("should set error when no file is selected", async () => {
-    const { result } = renderHook(() => useUploadFile());
+    const { result } = renderHook(() => useUploadConfig());
 
     act(() => {
       result.current.uploadFile();
@@ -30,7 +30,7 @@ describe("useUploadFile", () => {
   });
 
   it("should set error when file upload fails", async () => {
-    const { result } = renderHook(() => useUploadFile());
+    const { result } = renderHook(() => useUploadConfig());
 
     act(() => {
       result.current.uploadFile();

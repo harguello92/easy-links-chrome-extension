@@ -1,4 +1,4 @@
-import { createUploadElement, removeUploadElement } from "./fileUpload";
+import { createUploadElement, removeUploadElement } from "./files";
 
 describe('File Upload', () => {
   let input: HTMLInputElement;

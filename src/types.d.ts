@@ -2,12 +2,11 @@
 interface ConfigItemLink {
   name: string;
   url: string;
-  CSSClasses?: string;
-  checkable?: boolean;
 }
 
 export interface ConfigItem {
   name: string;
+  description?: string;
   links: ConfigItemLink[];
 }
 

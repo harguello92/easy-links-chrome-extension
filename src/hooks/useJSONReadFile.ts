@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { readFileAsJson } from "../utils/fileUpload";
+import { readFileAsJson } from "../utils/files";
 
 const useJSONReadFile = () => {
   const [isReading, setIsReading] = useState(false);
